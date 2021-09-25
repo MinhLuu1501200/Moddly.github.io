@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+:root {
+  --primary-color: #3f51b5;
+  --url-background: url("../images/header_back.png");
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+.container-fluid {
+  width: 100%;
+  background-image: var(--url-background);
+  background-position: 0 0;
+  background-size: auto;
+  background-repeat: repeat;
+  height: 80px;
+  padding: 0 25px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-weight: 600;
+  font-size: 3rem;
+}
+.buy-coffee > img {
+  height: 50px;
+}
+.main {
+  width: 100%;
+
+  background-image: url("../images/main-back.png");
+  background-position: 0 0;
+  background-size: auto;
+  background-repeat: repeat;
+  background-color: #f1efe5;
+}
+.app {
+  margin: auto;
+  width: 1200px;
+  padding: 20px 12px;
+}
+.control {
+  padding: 20px 40px;
+}
+.control-btn {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+.control-select {
+}
+.control-random .control-random-btn,
+.control-select .control-select-btn {
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  margin-right: 1.5rem;
+}
+.control-random .control-random-btn {
+  border-radius: 40px;
+}
+#musics {
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+.backlinear {
+  width: 200px;
+  height: 200px;
+  /* background-image: linear-gradient(
+    115deg,
+    #4fcf70,
+    #fad648,
+    #a767e5,
+    #12bcfe,
+    #44ce7b
+  ); */
+  background-size: 200% 200%;
+  border-radius: 20px;
+  position: relative;
+  transition: all ease-in-out 1s;
+  animation: backAnimate 2s ease-in-out infinite;
+}
+.music-btn:hover {
+  box-shadow: 0px 0px 30px #827e7e;
+  transition: box-shadow 0.3s linear;
+}
+.music-btn {
+  width: 192px;
+  height: 192px;
+  background-color: #fff;
+  background-image: var(--url-background);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  padding: 10px 10px;
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.music-btn > h2 {
+  color: rgba(48, 37, 37, 30%);
+  text-transform: capitalize;
+}
+.music-icon {
+  font-size: 70px;
+  color: rgba(48, 37, 37, 70%);
+  text-align: center;
+  margin-top: 30px;
+}
+
+.music-player {
+}
+.music-process {
+  width: 100%;
+  padding: 2rem 0;
+}
+.music-process > input {
+  width: 100%;
+  height: 0.1rem;
+}
+.music-process {
+  display: none;
+}
+
+.shadow {
+  box-shadow: 1px 4px 20px #827e7e;
+}
+@keyframes backAnimate {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
