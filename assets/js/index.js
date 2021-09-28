@@ -3,106 +3,105 @@
 let $= document.querySelector.bind(document)
 let $$= document.querySelectorAll.bind(document)
 let musicBtn
+let volume
 let app ={
     isPlaying:false,
     songs:[
         {
             name:"Rain",
-            path:"../Moodly/assets/audio/rain.mp3",
+            path:"assets/audio/rain.mp3",
             icon:"fas fa-cloud-rain",
             
 
         },
         {
             name:"Campfire",
-            path:"../Moodly/assets/audio/fire.mp3",
+            path:"assets/audio/fire.mp3",
             icon:"fas fa-fire",
            
         }
         ,
         {
             name:"Waterfall",
-            path:"../Moodly/assets/audio/waterfall.wav",
+            path:"assets/audio/waterfall.wav",
             icon:"fas fa-tint",
            
         },
         {
             name:"Piano Music",
-            path:"../Moodly/assets/audio/Piano.mp3",
+            path:"assets/audio/Piano.mp3",
             icon:"fab fa-gitter",
             
         },
         {
             name:"Forest",
-            path:"../Moodly/assets/audio/forest.wav",
+            path:"assets/audio/forest.wav",
             icon:"fab fa-pagelines",
             
         },
         {
             name:"Cafe",
-            path:"../Moodly/assets/audio/in-cafe.wav",
+            path:"assets/audio/in-cafe.wav",
             icon:"fas fa-mug-hot",
             
         },
         {
             name:"Snow",
-            path:"../Moodly/assets/audio/snow.mp3",
-            icon:"far fa-snowflake",
+            path:"assets/audio/snow.mp3",
+            icon:"fas fa-snowflake",
             
         },
         {
             name:"Library",
-            path:"../Moodly/assets/audio/library.mp3",
+            path:"assets/audio/library.mp3",
             icon:"fas fa-book-open",
             
         },
         {
             name:"Leaves",
-            path:"../Moodly/assets/audio/leaves.mp3",
+            path:"assets/audio/leaves.mp3",
             icon:"fas fa-leaf",
             
         },
         {
             name:"Steps",
-            path:"../Moodly/assets/audio/steps.wav",
+            path:"assets/audio/steps.wav",
             icon:"fas fa-walking",
         },
         {
             name:"Wind",
-            path:"../Moodly/assets/audio/wind.mp3",
+            path:"assets/audio/wind.mp3",
             icon:"fas fa-wind",
         },
         {
             name:"Rowing",
-            path:"../Moodly/assets/audio/rowing.mp3",
+            path:"assets/audio/rowing.mp3",
             icon:"fas fa-ship",
         },
         {
             name:"Night",
-            path:"../Moodly/assets/audio/night.mp3",
+            path:"assets/audio/night.mp3",
             icon:"fas fa-moon",
         },
         {
             name:"Ocean",
-            path:"../Moodly/assets/audio/ocean.mp3",
+            path:"assets/audio/ocean.mp3",
             icon:"fas fa-water",
         },
         {
             name:"Windchime",
-            path:"../Moodly/assets/audio/windchime.mp3",
+            path:"assets/audio/windchime.mp3",
             icon:"far fa-bell",
         },
         
         
 
     ],
-    configEle:function(){
-        console.log("hello succgesst");
-
-    },
+    
     render:function(){
         const htmls= this.songs.map((song)=>{
-                return `<div class="backlinear"><div class="music-btn">
+                return `<div class="backlinear">
+                <div class="music-btn">
                 <audio class="music-player" control loop preload="none">
                     <source src="${song.path}" type="audio/mpeg" />
                 </audio>
@@ -110,18 +109,19 @@ let app ={
                 <div class="music-icon">
                   <i class="${song.icon}"></i>
                 </div>
-                <div class="music-process">
-                  <input
-                    id="progress"
-                    class="progress"
-                    type="range"
-                    value="0"
-                    step="1"
-                    min="0"
-                    max="100"
-                  />
-                </div>
-              </div></div>`
+                
+              </div>
+              <div class="range">
+      <div class="sliderValue">
+        <span>100</span>
+      </div>
+      <div class="field">
+        
+        <input type="range" min="10" max="100" value="100" steps="1" />
+        
+      </div>
+    </div>
+                </div>`
         })
         const musicElement= document.createElement("div")
         musicElement.classList.add("flex")
@@ -151,32 +151,53 @@ let app ={
                 #44ce7b
               )`
         }
-
-
          // Handling music player
+        let showVolume= function(element){
+            let rangeElement= element.parentElement.querySelector(".range")
+            rangeElement.style.display = "block";
+        }
+        let hideVolume= function(element){
+            let rangeElement= element.parentElement.querySelector(".range")
+            rangeElement.style.display = "none";
+        }
+        let setUpVolume= function(element) {
+            let inputSlider= element.parentElement.querySelector(".range input")
+            
+            let audioVolume= element.querySelector(".music-player")
+            const slideValue = element.parentElement.querySelector(".range span");
+            console.log(inputSlider,audioVolume,slideValue);
+            let _this= inputSlider
+      inputSlider.oninput = (()=>{
+        let value = inputSlider.value;
+        slideValue.textContent = value;
+        slideValue.style.left = value + "%";
+        slideValue.classList.add("show");
+        audioVolume.volume= _this.value/100
+      });
+      inputSlider.onblur = (()=>{
+        slideValue.classList.remove("show");
+      });  
+        }
         let openMusic=function(element,audio)
         {
             element.addEventListener("click",function(){
-                
-                // radiateAnimation(element)
                 if(this.isPlaying){
                     audio.pause()
                     audio.currentTime=0
                     this.isPlaying=false
                     effectPause(element)
-                    
+                    hideVolume(element) 
                 }
                 else{ 
                     audio.play()
                     this.isPlaying=true
                     effectPlay(element)
-                }
-                
-                   
+                    showVolume( element)
+                    setUpVolume(element)
+                }   
             })
            
         }
-       
         musicBtn.forEach(element => {
             let audio = element.querySelector(".music-player")
             openMusic(element,audio)
