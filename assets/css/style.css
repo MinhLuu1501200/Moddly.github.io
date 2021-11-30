@@ -50,23 +50,23 @@ body {
   width: 1200px;
   padding: 20px 12px;
 }
-.control {
+.controller {
   padding: 20px 40px;
 }
-.control-btn {
+.controller-btn {
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
   cursor: pointer;
 }
-.control-select {
+.controller-select {
 }
-.control-random .control-random-btn,
-.control-select .control-select-btn {
+.controller-random .controller-random-btn,
+.controller-select .controller-select-btn {
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   margin-right: 1.5rem;
 }
-.control-random .control-random-btn {
+.controller-random .controller-random-btn {
   border-radius: 40px;
 }
 #musics {
