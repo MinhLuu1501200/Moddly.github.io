@@ -1,4 +1,4 @@
-//1. Render print interface
+// 1. Render print interface
 //2. hanler click on a music btn element be able to run song
 let $ = document.querySelector.bind(document);
 let $$ = document.querySelectorAll.bind(document);
@@ -6,6 +6,7 @@ let musicBtn;
 let volume;
 let app = {
   isPlaying: false,
+  isToggle: false,
   songs: [
     {
       name: "Rain",
@@ -120,8 +121,8 @@ let app = {
   handelEvent: function () {
     musicBtn = $$(".music-btn");
     controller_btn = $$(".controller-select-btn");
-    console.log(musicBtn);
     console.log(controller_btn);
+    var _self = this;
     // Handel effect when music run
     let effectPause = function (element) {
       element.classList.remove("shadow");
@@ -149,10 +150,8 @@ let app = {
     };
     let setUpVolume = function (element) {
       let inputSlider = element.parentElement.querySelector(".range input");
-
       let audioVolume = element.querySelector(".music-player");
       const slideValue = element.parentElement.querySelector(".range span");
-      console.log(inputSlider, audioVolume, slideValue);
       let _this = inputSlider;
       inputSlider.oninput = () => {
         let value = inputSlider.value;
@@ -167,21 +166,25 @@ let app = {
     };
     let openMusic = function (element, audio) {
       element.addEventListener("click", function () {
-        // let isP = this.isPlaying.bind(app);
-        // console.log(isP);
-        if (this.isPlaying) {
+        console.log(_self.isPlaying);
+        // if(_self.isToggle){
+        //   _self.isPlaying= true;
+        // }
+        if (_self.isPlaying) {
           audio.pause();
           audio.currentTime = 0;
-          this.isPlaying = false;
+          _self.isPlaying = false;
           effectPause(element);
           hideVolume(element);
+          console.log("pause", _self.isPlaying);
         } else {
           audio.play();
-          console.log(this.isPlaying);
-          this.isPlaying = true;
+          console.log("open1", _self.isPlaying);
+          _self.isPlaying = true;
           effectPlay(element);
           showVolume(element);
           setUpVolume(element);
+          console.log("open", _self.isPlaying);
         }
       });
     };
@@ -192,18 +195,67 @@ let app = {
     controller_btn.forEach((element) => {
       element.addEventListener("click", () => {
         let typeBtn = element.className;
+        console.log(typeof typeBtn);
         if (typeBtn.match("btn_pro")) {
           musicBtn.forEach((element, index) => {
+            element.querySelector(".music-player").pause();
+            element.querySelector(".music-player").currentTime = 0;
+            effectPause(element);
+            hideVolume(element);
             if (index === 0 || index === 5) {
               element.querySelector(".music-player").play();
-              this.isPlaying = true;
+              _self.isToggle = true;
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
             }
           });
         } else if (typeBtn.match("btn_focus")) {
-        } else {
+          musicBtn.forEach((element, index) => {
+            element.querySelector(".music-player").pause();
+            element.querySelector(".music-player").currentTime = 0;
+            effectPause(element);
+            hideVolume(element);
+            if (index === 4 || index === 8) {
+              element.querySelector(".music-player").play();
+              _self.isToggle = true;
+              effectPlay(element);
+              showVolume(element);
+              setUpVolume(element);
+            }
+          });
+        } else if (typeBtn.match("btn_relax")) {
+          musicBtn.forEach((element, index) => {
+            element.querySelector(".music-player").pause();
+            element.querySelector(".music-player").currentTime = 0;
+
+            effectPause(element);
+            hideVolume(element);
+            if (index === 12 || index === 13) {
+              element.querySelector(".music-player").play();
+              _self.isToggle = true;
+              effectPlay(element);
+              showVolume(element);
+              setUpVolume(element);
+            }
+          });
+        } else if (typeBtn.match("btn_random")) {
+          var radom = Math.floor(Math.random() * 15);
+          musicBtn.forEach((element, index) => {
+            element.querySelector(".music-player").pause();
+            element.querySelector(".music-player").currentTime = 0;
+
+            effectPause(element);
+            hideVolume(element);
+
+            if (index === radom) {
+              element.querySelector(".music-player").play();
+              _self.isToggle = true;
+              effectPlay(element);
+              showVolume(element);
+              setUpVolume(element);
+            }
+          });
         }
       });
     });
