@@ -211,7 +211,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
-              element.parentElement.querySelector(".range span");
+              const slideValue =
+                element.parentElement.querySelector(".range span");
               slideValue.classList.remove("show");
             }
           });
@@ -244,7 +245,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
-              element.parentElement.querySelector(".range span");
+              const slideValue =
+                element.parentElement.querySelector(".range span");
               slideValue.classList.remove("show");
             }
           });
@@ -261,7 +263,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
-              element.parentElement.querySelector(".range span");
+              const slideValue =
+                element.parentElement.querySelector(".range span");
               slideValue.classList.remove("show");
             }
           });
