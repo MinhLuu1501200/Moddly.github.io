@@ -147,13 +147,15 @@ let app = {
       let audioVolume = element.querySelector(".music-player");
       let inputSlider = element.parentElement.querySelector(".range input");
       inputSlider.value = 100;
-      slideValue.textContent = value;
-      slideValue.style.left = value + "%";
+      const slideValue = element.parentElement.querySelector(".range span");
+      slideValue.style.left = "100%";
+      slideValue.textContent = 100;
       slideValue.classList.add("show");
-      audioVolume.volume = 10;
+      audioVolume.volume = 1.0;
     };
     let setUpVolume = function (element) {
       let inputSlider = element.parentElement.querySelector(".range input");
+      console.log(inputSlider.value);
       let audioVolume = element.querySelector(".music-player");
       const slideValue = element.parentElement.querySelector(".range span");
       let _this = inputSlider;
@@ -196,6 +198,7 @@ let app = {
     controller_btn.forEach((element) => {
       element.addEventListener("click", () => {
         let typeBtn = element.className;
+        console.log(typeBtn);
         if (typeBtn.match("btn_pro")) {
           musicBtn.forEach((element, index) => {
             element.querySelector(".music-player").pause();
