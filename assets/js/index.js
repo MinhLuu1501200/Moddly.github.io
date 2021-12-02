@@ -5,8 +5,6 @@ let $$ = document.querySelectorAll.bind(document);
 let musicBtn;
 let volume;
 let app = {
-  isPlaying: false,
-  isToggle: false,
   songs: [
     {
       name: "Rain",
@@ -121,7 +119,6 @@ let app = {
   handelEvent: function () {
     musicBtn = $$(".music-btn");
     controller_btn = $$(".controller-select-btn");
-    console.log(controller_btn);
     var _self = this;
     // Handel effect when music run
     let effectPause = function (element) {
@@ -164,38 +161,35 @@ let app = {
         slideValue.classList.remove("show");
       };
     };
-    let openMusic = function (element, audio) {
+
+    let openMusic = (element, audio) => {};
+
+    musicBtn.forEach((element) => {
+      let audio = element.querySelector(".music-player");
+
       element.addEventListener("click", function () {
-        console.log(_self.isPlaying);
-        // if(_self.isToggle){
-        //   _self.isPlaying= true;
         // }
-        if (_self.isPlaying) {
+        if (!audio.paused) {
           audio.pause();
+
           audio.currentTime = 0;
           _self.isPlaying = false;
           effectPause(element);
           hideVolume(element);
-          console.log("pause", _self.isPlaying);
         } else {
           audio.play();
-          console.log("open1", _self.isPlaying);
+
           _self.isPlaying = true;
           effectPlay(element);
           showVolume(element);
           setUpVolume(element);
-          console.log("open", _self.isPlaying);
         }
       });
-    };
-    musicBtn.forEach((element) => {
-      let audio = element.querySelector(".music-player");
-      openMusic(element, audio);
     });
+
     controller_btn.forEach((element) => {
       element.addEventListener("click", () => {
         let typeBtn = element.className;
-        console.log(typeof typeBtn);
         if (typeBtn.match("btn_pro")) {
           musicBtn.forEach((element, index) => {
             element.querySelector(".music-player").pause();
@@ -228,7 +222,6 @@ let app = {
           musicBtn.forEach((element, index) => {
             element.querySelector(".music-player").pause();
             element.querySelector(".music-player").currentTime = 0;
-
             effectPause(element);
             hideVolume(element);
             if (index === 12 || index === 13) {
@@ -244,10 +237,8 @@ let app = {
           musicBtn.forEach((element, index) => {
             element.querySelector(".music-player").pause();
             element.querySelector(".music-player").currentTime = 0;
-
             effectPause(element);
             hideVolume(element);
-
             if (index === radom) {
               element.querySelector(".music-player").play();
               _self.isToggle = true;
