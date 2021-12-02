@@ -158,6 +158,7 @@ let app = {
       console.log(inputSlider.value);
       let audioVolume = element.querySelector(".music-player");
       const slideValue = element.parentElement.querySelector(".range span");
+      slideValue.classList.remove("show");
       let _this = inputSlider;
       inputSlider.oninput = () => {
         let value = inputSlider.value;
@@ -187,7 +188,6 @@ let app = {
         } else {
           audio.play();
           _self.isPlaying = true;
-
           effectPlay(element);
           showVolume(element);
           setUpVolume(element);
