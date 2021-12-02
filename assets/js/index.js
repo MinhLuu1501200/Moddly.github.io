@@ -144,6 +144,13 @@ let app = {
     let hideVolume = function (element) {
       let rangeElement = element.parentElement.querySelector(".range");
       rangeElement.style.display = "none";
+      let audioVolume = element.querySelector(".music-player");
+      let inputSlider = element.parentElement.querySelector(".range input");
+      inputSlider.value = 100;
+      slideValue.textContent = value;
+      slideValue.style.left = value + "%";
+      slideValue.classList.add("show");
+      audioVolume.volume = 10;
     };
     let setUpVolume = function (element) {
       let inputSlider = element.parentElement.querySelector(".range input");
@@ -171,15 +178,14 @@ let app = {
         // }
         if (!audio.paused) {
           audio.pause();
-
           audio.currentTime = 0;
           _self.isPlaying = false;
           effectPause(element);
           hideVolume(element);
         } else {
           audio.play();
-
           _self.isPlaying = true;
+
           effectPlay(element);
           showVolume(element);
           setUpVolume(element);
