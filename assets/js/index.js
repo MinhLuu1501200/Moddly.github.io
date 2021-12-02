@@ -211,6 +211,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
+              element.parentElement.querySelector(".range span");
+              slideValue.classList.remove("show");
             }
           });
         } else if (typeBtn.match("btn_focus")) {
@@ -225,6 +227,9 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
+              const slideValue =
+                element.parentElement.querySelector(".range span");
+              slideValue.classList.remove("show");
             }
           });
         } else if (typeBtn.match("btn_relax")) {
@@ -239,6 +244,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
+              element.parentElement.querySelector(".range span");
+              slideValue.classList.remove("show");
             }
           });
         } else if (typeBtn.match("btn_random")) {
@@ -254,6 +261,8 @@ let app = {
               effectPlay(element);
               showVolume(element);
               setUpVolume(element);
+              element.parentElement.querySelector(".range span");
+              slideValue.classList.remove("show");
             }
           });
         }
